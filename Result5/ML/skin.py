@@ -132,12 +132,10 @@ for name in classifiers.keys():
     plt.title(f'{name} Hold-Out Set Confusion Matrix')
     plt.show()
 
-# 创建一个 DataFrame 来保存 Hold-Out 结果
 holdout_results_df = pd.DataFrame(columns=[
     "Model", "Accuracy", "Precision", "Recall", "F1 Score"
 ])
 
-# 记录 Hold-Out 集上的结果
 for name, results in holdout_results.items():
     new_row = pd.DataFrame({
         "Model": [name],
