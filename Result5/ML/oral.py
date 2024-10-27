@@ -148,7 +148,6 @@ for name, results in holdout_results.items():
     })
     holdout_results_df = pd.concat([holdout_results_df, new_row], ignore_index=True)
 
-# 保存到 CSV 文件
 holdout_results_csv_path = "holdout_model_evaluation_oral_results.csv"
 holdout_results_df.to_csv(holdout_results_csv_path, index=False)
 
