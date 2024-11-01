@@ -160,40 +160,11 @@ verboseScatterplot(Alldegrees$kWithin[restrict1],
                    xlab = "Connectivity", ylab = "Gene Significance", abline = TRUE)}
 dev.off()
 a1 <- unique(names(datExpr)[moduleColors %in% colorlevels])
-all1 <- femData[rownames(femData) %in% a1,]
-write.csv(a11,"all_oral.csv")
-###########################
-
-a1 <- unique(names(datExpr)[moduleColors %in% colorlevels])
-a_all <- as.data.frame(matrix(ncol = 2))
-colnames(a_all) <- colnames(a2)
-for(i in 1:length(colorlevels)){
-  a1 <- unique(names(datExpr)[moduleColors %in% colorlevels[i]])
-  
-  a2 <- data.frame(name=a1,color=colorlevels[i])
-  a_all <- rbind(a_all,a2)
-}
-all1 <- na.omit(a_all)
-data2 <- femData[all1$name,]
-a <- as.data.frame(rowSums(data2))
-###############need$ <- read.csv("a1l2.csv")
-traitData <- traitData [traitData$ID %in% rownames(datExpr),  ]
-traitData <- traitData[rownames(traitData) %in% colnames(data2),]
-a_all <- c()
-for (i in 1:nrow(data2)){
-  a <- cor(t(data2[i,]),traitData$Age)
-  a_all <- c(a,a_all)
-}
-data3 <- t(data2)
-all1$value <- a_all
-write.csv(data2,"data2.csv")
-write.csv(all1,"oralresult.csv")
 #################
-data <- t(femData)
+data <- t(femData[a1,])
 data <- scale(data)
-data <- data[,all1$name]
 data <- merge(traitData,data,by="row.names")
 data <- data[,-c(2,3)]
-write.csv(data,"skin_mechine.csv")
+write.csv(data,"skin_machine.csv")
 
 
