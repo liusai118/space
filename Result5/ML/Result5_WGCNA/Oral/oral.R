@@ -1,5 +1,5 @@
 library(WGCNA)
-femData = read.csv("oral_deg.csv",row.names = 1) #载入基因表达量数据
+femData = read.csv("WGCNA_oral.csv",row.names = 1) #载入基因表达量数据
 femData<- log10(femData + 1)
 datExpr0 = as.data.frame(t(femData)) 
 gsg = goodSamplesGenes(datExpr0, verbose = 6);
