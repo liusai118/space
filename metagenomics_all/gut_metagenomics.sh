@@ -21,8 +21,8 @@ conda activate rna
 cat gut.txt | while read id
 do
   id=$(echo "$id" | tr -d '\r')
-  fastp -i ${path_fastq}/${id}_rmHost.1.fq.gz -o ${path_clean}/${id}_filter_R1.fq.gz \
-        -I ${path_fastq}/${id}_rmHost.2.fq.gz -O ${path_clean}/${id}_filter_R2.fq.gz \
+  fastp -i ${path_fastq}/${id}.1.fq.gz -o ${path_clean}/${id}_filter_R1.fq.gz \
+        -I ${path_fastq}/${id}.2.fq.gz -O ${path_clean}/${id}_filter_R2.fq.gz \
         -h ${path_report}/${id}_report.html
 done
 
