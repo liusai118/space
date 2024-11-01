@@ -17,7 +17,7 @@ do
     id=${id%%.*}  # 去除文件扩展名
 
     # 循环处理类型
-    cat index.txt | while read type
+    cat indexskin.txt | while read type
     do
         # 创建每个类型和样本的输出目录
         mkdir -p $output/FC/${type}
