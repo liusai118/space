@@ -160,6 +160,7 @@ verboseScatterplot(Alldegrees$kWithin[restrict1],
                    xlab = "Connectivity", ylab = "Gene Significance", abline = TRUE)}
 dev.off()
 a1 <- unique(names(datExpr)[moduleColors %in% colorlevels])
+
 #################
 data <- t(femData[a1,])
 data <- scale(data)
