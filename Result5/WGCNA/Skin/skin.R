@@ -166,6 +166,6 @@ data <- t(femData[a1,])
 data <- scale(data)
 data <- merge(traitData,data,by="row.names")
 data <- data[,-c(2,3)]
-write.csv(data,"skin_machine.csv")
+write.csv(data,"../../ML/data/skin_machine.csv")
 
 
