@@ -79,7 +79,7 @@ def evaluate_on_holdout(model, X_train, y_train, X_holdout, y_holdout):
 
 
 data_folder = Path("data")
-df = pd.read_csv(data_folder / "oral_mechine.csv")
+df = pd.read_csv(data_folder / "oral_machine.csv")
 X = df.iloc[:, 2:]
 y = df["Group"]
 ros = SMOTE(random_state=20)
