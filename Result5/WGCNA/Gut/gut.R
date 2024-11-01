@@ -157,4 +157,4 @@ data <- t(femData[a1,])
 data <- scale(data)
 data <- merge(datTraits,data,by="row.names")
 data <- data[,-c(2,4)]
-write.csv(data,"../data/gut_machine.csv")
+write.csv(data,"../../ML/data/gut_machine.csv")
