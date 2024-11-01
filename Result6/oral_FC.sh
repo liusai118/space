@@ -12,7 +12,7 @@ mkdir -p $output/sam
 mkdir -p $output/bam
 
 # 循环处理样本
-cat oral.txt | while read id
+cat oral_id.txt | while read id
 do
     id=${id%%.*}  # 去除文件扩展名
 
