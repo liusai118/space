@@ -175,4 +175,4 @@ data <- t(femData[a1,])
 data <- scale(data)
 data <- merge(traitData,data,by="row.names")
 data <- data[,-2]
-write.csv(data,"../data/oral_machine.csv")
+write.csv(data,"../../ML/data/oral_machine.csv")
