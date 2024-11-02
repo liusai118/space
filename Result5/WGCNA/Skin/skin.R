@@ -27,7 +27,7 @@ names(traitData)
 Samples = rownames(datExpr);
 traitRows = match(Samples, rownames(traitData));
 datTraits = traitData[traitRows, -1];
-rownames(datTraits) = traitData[traitRows, 2];
+#rownames(datTraits) = traitData[traitRows, 2];
 
 
 collectGarbage()
@@ -59,7 +59,7 @@ text(sft$fitIndices[,1], sft$fitIndices[,5], labels=powers,
      cex=cex1, col="red")
 sft$powerEstimate
 cor <- WGCNA::cor
-net = blockwiseModules(datExpr, power = 8,
+net = blockwiseModules(datExpr, power = 6,
                        TOMType = "unsigned", minModuleSize = 10,
                        reassignThreshold = 1, mergeCutHeight = 0.25,
                        numericLabels = TRUE, pamRespectsDendro = FALSE,
