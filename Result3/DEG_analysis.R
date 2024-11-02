@@ -1,3 +1,4 @@
+setwd("Result3/")
 ###############Gut
 meta <- read.csv("gut/meta.csv")
 matrix <- read.table("gut/all.tsv",header = T)
@@ -7,8 +8,6 @@ m <- m[-1,]
 colnames(m) <- gsub(".taxonReads","",colnames(m))
 m <- m[,colnames(m) %in% meta$ID]
 m[is.na(m)] <- 0
-
-
 meta <- meta[meta$ID %in%colnames(m),]
 meta_yong <- meta %>%
   dplyr::filter(host.age <36)
@@ -65,29 +64,19 @@ df4_label <- df4[df4$pvalue < 1.4e-17, ]
 library(ggplot2)
 library(ggrepel)
 ggplot(df4, aes(logFC, -log10(pvalue))) +
-  # 横向水平参考线：
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "#999999") +
-  # 纵向垂直参考线：
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "#999999") +
-  # 散点图:
   geom_point(aes(size = -log10(pvalue), color = -log10(pvalue))) +
-  # 指定颜色渐变模式：
   scale_color_gradientn(values = seq(0, 1, 0.1),
                         colors = c("#39489f", "#39bbec", "#f9ed36", "#f38466", "#b81f25")) +
-  # 指定散点大小渐变模式：
   scale_size_continuous(range = c(1, 3)) +
-  # 主题调整：
   theme_bw() +
-  # 调整主题和图例位置：
   theme(panel.grid = element_blank(),
         legend.position = c(0.01, 0.7),
         legend.justification = c(0, 1)) +
-  # 设置部分图例不显示：
   guides(col = guide_colourbar(title = "-Log10(p-value)"),
          size = "none") +
-  # 添加标签，使用 geom_text_repel 确保标签不会重叠和超出边界：
   geom_text_repel(data = df4_label, aes(label = df4_label[,1]), color = "black", size = 3) +
-  # 修改坐标轴：
   xlab("LogFC") +
   ylab("-Log10(p-value)")
 ###########all
@@ -104,14 +93,11 @@ colnames(otutab) <- gsub(".cladeReads","",colnames(otutab))
 otutab <- otutab %>% mutate(across(everything(), ~ ifelse(is.na(.), 0, .)))
 otutab <- otutab[,colnames(otutab) %in% meta_all$Sample ]
 otutab_all <- otutab
-
 #otutab <- otutab_all
 metadata_oral <- meta_all[meta_all$tissue=="Oral",]
 metadata_skin <- meta_all[meta_all$tissue=="Skin",]
 meta_oral <- meta_all[meta_all$tissue=="Oral",]
 meta_skin <- meta_all[meta_all$tissue=="Skin",]
-
-
 young <- meta_skin[meta_skin$Age < 35,]
 young$Group <- "young"
 aging <- meta_skin[meta_skin$Age > 55,]
@@ -202,29 +188,19 @@ library(ggplot2)
 library(ggrepel)
 df4_label <- df4[df4$pvalue < 1.4e-20, ]
 ggplot(df4, aes(logFC, -log10(pvalue))) +
-  # 横向水平参考线：
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "#999999") +
-  # 纵向垂直参考线：
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "#999999") +
-  # 散点图:
   geom_point(aes(size = -log10(pvalue), color = -log10(pvalue))) +
-  # 指定颜色渐变模式：
   scale_color_gradientn(values = seq(0, 1, 0.1),
                         colors = c("#39489f", "#39bbec", "#f9ed36", "#f38466", "#b81f25")) +
-  # 指定散点大小渐变模式：
   scale_size_continuous(range = c(1, 3)) +
-  # 主题调整：
   theme_bw() +
-  # 调整主题和图例位置：
   theme(panel.grid = element_blank(),
         legend.position = c(0.01, 0.7),
         legend.justification = c(0, 1)) +
-  # 设置部分图例不显示：
   guides(col = guide_colourbar(title = "-Log10(p-value)"),
          size = "none") +
-  # 添加标签，使用 geom_text_repel 确保标签不会重叠和超出边界：
   geom_text_repel(data = df4_label, aes(label = df4_label[,1]), color = "black", size = 3) +
-  # 修改坐标轴：
   xlab("logFC") +
   ylab("-Log10(p-value)")
 
@@ -243,7 +219,6 @@ b_analyse(otutab, method = "pca") -> b_res
 plot(b_res, "Group", meta_skin1, bi = T,sample_label = FALSE)
 DES <- otutab_skin
 col<- data.frame(row.names = colnames(DES),Group=meta_skin1$Group)
-# 确保 Group 是因子类型
 col$Group <- factor(col$Group)
 levels(col$Group)
 col$Group <- relevel(col$Group, ref = "young")
