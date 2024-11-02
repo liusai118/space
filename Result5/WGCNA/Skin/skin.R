@@ -1,3 +1,4 @@
+setwd("Result5/WGCNA/Skin")
 library(WGCNA)
 femData = read.csv("WGCNA_skin.csv",row.names = 1) 
 femData<- log10(femData + 1)
