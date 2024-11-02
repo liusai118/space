@@ -1,4 +1,4 @@
-setwd("Result5/WGCNA/GUT")
+setwd("Result5/WGCNA/Gut")
 library(WGCNA)
 femData = read.csv("WGCNA_gut.csv",row.names = 1) 
 femData <-femData[,-192]
