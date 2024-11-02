@@ -11,6 +11,9 @@ library(gwasglue)
 res_all <- as.data.frame(matrix(ncol = 9))
 colnames(res_all) <- c("id.exposure","id.outcome","outcome","exposure","method","nsnp","b","se","pval")
 file_list_all <- c("phylum","order","class","family","genus")
+library(VariantAnnotation)
+vcfRT <- readVcf("../ebi-a-GCST006697.vcf.gz")
+outcome = gwasvcf_to_TwoSampleMR(vcf = vcfRT, type="outcome")
 for ( j in 1:length(file_list_all)){
 filelist <- list.files(paste0("gut",file_list_all[j]))
 for (i in 1:length(filelist)){
