@@ -144,7 +144,7 @@ a_diversity(otutab) -> a_res
 plot(a_res, "State.1", metadata_oral)+ 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),    
     panel.border = element_rect(color = "black", fill = NA, size = 1)
   )
 dist1 <- mat_dist(otutab, method = "bray")
@@ -152,7 +152,7 @@ as.b_dist(dist1, group_df = metadata_oral["State.1"]) -> b_dist1
 plot(b_dist1, c_group = "intra", alpha = T) + 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),   
     panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 plot(b_dist1, mode = 2)
