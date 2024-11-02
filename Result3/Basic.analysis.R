@@ -107,7 +107,7 @@ p <- ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = Tissue, shape = Gender)) 
   scale_shape_manual(values = c(16, 17, 15, 18)) + 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),   
     panel.border = element_rect(color = "black", fill = NA, size = 1) 
   )
 p
@@ -117,7 +117,7 @@ p <- ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = Tissue, shape = Gender)) 
   scale_color_manual(values = c("#91D1C2", "#E64B35", "#4DBBD5")) +
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),  
     panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 p_with_marginal <- ggMarginal(p, type = "density",groupColour = T, groupFill = TRUE)
@@ -128,14 +128,14 @@ ggMarginal(p, type = "density", fill = "blue")
 a <- rare_curve_sample(otutab_spe)
 p <- plot(a)+  theme_minimal() +
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),   
     panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 a <- rare_curve_species(otutab, mode = 1) 
 p <- plot(a)+ 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),    
     panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 plot(a)
@@ -156,7 +156,7 @@ as.b_dist(dist1, group_df = metadata_oral["Age"]) -> b_dist1
 plot(b_dist1, c_group = "intra", alpha = T) + 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),    
     panel.border = element_rect(color = "black", fill = NA, size = 1)
   )
 plot(b_dist1, mode = 2)+ 
@@ -199,7 +199,7 @@ as.b_dist(dist1, group_df = metadata_Gut["Age"]) -> b_dist1
 plot(b_dist1, mode = 2)+  
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
+    panel.grid = element_blank(),  
     panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 
