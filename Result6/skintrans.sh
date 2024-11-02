@@ -25,7 +25,7 @@ source /home/liusai/miniconda3/etc/profile.d/conda.sh
 conda activate rna
 
 cat skin_id.txt | while read id; do
-    echo "开始: $(date +"%Y-%m-%d %T")"
+    echo ": $(date +"%Y-%m-%d %T")"
     id=$(echo "$id" | tr -d '\r')
     bowtie2 -p 32 -x /home/liusai/index/bowtie2/human/ncbi/p14/human \
     -1 ${path_fastq}/GLDS-564_metatranscriptomics_metaT_${id}_R1_HRremoved_raw.fastq.gz \
