@@ -1,4 +1,13 @@
-
+library(MRInstruments)
+library(MendelianRandomization) 
+library(TwoSampleMR) 
+library(simex) 
+library(data.table)
+library(dplyr)
+library(VariantAnnotation)
+library(VariantAnnotation)
+library(gwasglue)
+################################
 res_all <- as.data.frame(matrix(ncol = 9))
 colnames(res_all) <- c("id.exposure","id.outcome","outcome","exposure","method","nsnp","b","se","pval")
 file_list_all <- c("phylum","order","class","family","genus")
@@ -33,16 +42,16 @@ for (i in 1:length(filelist)){
   exp_dat$eaf.exposure <- paste0(filelist[i])
   exp_dat <- exp_dat%>%
     dplyr::rename(
-      rsid = SNP,         # SNP 列重命名为 rsid
-      pval = pval.exposure,           # P 值列重命名为 pval
-      id = eaf.exposure       # 暴露列重命名为 id
+      rsid = SNP,        
+      pval = pval.exposure,       
+      id = eaf.exposure    
     )
   exposure_data_clumped <- ld_clump(
-    dat = exp_dat,                      # 暴露数据
-    clump_kb = 1000,               # clumping 的窗口大小
-    clump_r2 = 0.001,             # P 值阈值
-    bfile = "/home/liusai/index/GWAS/EUR",          # 本地 PLINK 参考数据集前缀
-    plink_bin = "/home/liusai/miniconda3/envs/GWAS/bin/plink"     # Linux 系统下的 plink 可执行文件路径
+    dat = exp_dat,                 
+    clump_kb = 1000,             
+    clump_r2 = 0.001,           
+    bfile = "/home/liusai/index/GWAS/EUR",       
+    plink_bin = "/home/liusai/miniconda3/envs/GWAS/bin/plink"     
   )
   
   exp_dat <- format_data(
