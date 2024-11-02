@@ -1,3 +1,4 @@
+setwd("Result5/WGCNA/Oral")
 library(WGCNA)
 femData = read.csv("WGCNA_oral.csv",row.names = 1) 
 femData<- log10(femData + 1)
