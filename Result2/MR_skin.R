@@ -34,17 +34,17 @@ for (i in 1:length(filelist)){
   a$eaf.exposure <- id
   a <- a %>%
     dplyr::rename(
-      rsid = SNP,         # SNP 列重命名为 rsid
-      pval = pval.exposure,           # P 值列重命名为 pval
-      id = eaf.exposure       # 暴露列重命名为 id
+      rsid = SNP,        
+      pval = pval.exposure,          
+      id = eaf.exposure      
     )
   exposure_data_clumped <- ld_clump(
-    dat = a,                      # 暴露数据
-    clump_kb = 1000,               # clumping 的窗口大小
-    clump_r2 = 0.001,               # LD r^2 阈值
-    clump_p = 1,pop = "EAS",                    # P 值阈值
-    bfile = "/home/liusai/index/GWAS/EAS",          # 本地 PLINK 参考数据集前缀
-    plink_bin = "/home/liusai/miniconda3/envs/GWAS/bin/plink"     # Linux 系统下的 plink 可执行文件路径
+    dat = a,                     
+    clump_kb = 1000,               
+    clump_r2 = 0.001,              
+    clump_p = 1,pop = "EAS",                    
+    bfile = "/home/liusai/index/GWAS/EAS",         
+    plink_bin = "/home/liusai/miniconda3/envs/GWAS/bin/plink"     
   )
   snp_list <- exposure_data_clumped$rsid
   exp_dat <- format_data(
