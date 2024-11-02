@@ -5,7 +5,7 @@ datExpr0 = as.data.frame(t(femData))
 gsg = goodSamplesGenes(datExpr0, verbose = 6);
 gsg$allOK
 sampleTree = hclust(dist(datExpr0), method = "average")
-sizeGrWindow(12,9) #视图
+sizeGrWindow(12,9) 
 par(cex = 0.6);
 par(mar = c(0,4,2,0))
 plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="", cex.lab = 1.5,
@@ -34,7 +34,7 @@ collectGarbage()
 
 
 sampleTree2 = hclust(dist(datExpr), method = "average")
-traitColors = numbers2colors(datTraits, signed = FALSE) #用颜色代表关联度
+traitColors = numbers2colors(datTraits, signed = FALSE) 
 plotDendroAndColors(sampleTree2, traitColors,
                     groupLabels = names(datTraits),
                     main = "Sample dendrogram and trait heatmap")
@@ -85,14 +85,14 @@ MEs = orderMEs(MEs0)
 moduleTraitCor = cor(MEs, datTraits, use = "p");
 
 moduleTraitPvalue = corPvalueStudent(moduleTraitCor, nSamples);
-# 通过相关值对每个关联进行颜色编码
+
 sizeGrWindow(10,6)
-# 展示模块与表型数据的相关系数和 P值
+
 textMatrix = paste(signif(moduleTraitCor, 2), "\n(",
                    signif(moduleTraitPvalue, 1), ")", sep = "");
 dim(textMatrix) = dim(moduleTraitCor)
 par(mar = c(6, 8.5, 3, 3));
-# 用热图的形式展示相关系数
+
 labeledHeatmap(Matrix = moduleTraitCor,
                xLabels = names(datTraits),
                yLabels = names(MEs),
@@ -104,10 +104,6 @@ labeledHeatmap(Matrix = moduleTraitCor,
                cex.text = 0.1,
                zlim = c(-0.6,0.6),
                main = paste("Module-trait relationships"))
-
-#colors = greenWhiteRed(50)不适用于红绿色盲患者，建议用 blueWhiteRed代替.
-#该分析确定了几个重要的模块-特征关联。我们将体重作为感兴趣的特征来研究。
-
 
 lantency = as.data.frame(datTraits$Age);
 names(lantency) = "glycemia";
@@ -121,15 +117,14 @@ GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSam
 names(geneTraitSignificance) = paste("GS.", names(lantency), sep="");
 names(GSPvalue) = paste("p.GS.", names(lantency), sep="");
 
-# 这部分计算量还挺大的，如果基因数目多的话需要在Linux下计算
 ADJ=abs(cor(datExpr,use="p"))^6
 Alldegrees =intramodularConnectivity(ADJ, moduleColors)
 write.csv(Alldegrees, file = "intramodularConnectivity.csv")
 
 pdf("GS vs. degree_weight3.pdf",width = 14,height = 8)
-# 布局。这个可以根据自己的module数目进行调整。我有20个module，所以这里设置了4行，每行5个图
+
 par(mfrow=c(4,5))
-# 设置图形边界，四个数字分别对应下左上右
+
 par(mar = c(5,5,3,3))
 colorlevels=unique(moduleColors)
 for (i in c(1:length(colorlevels))) 
