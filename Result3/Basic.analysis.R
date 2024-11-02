@@ -1,5 +1,4 @@
 setwd("Result3/")
-
 library(lme4)
 library(cluster)
 library(pctax)
@@ -65,7 +64,7 @@ stackplot(phylum, meta_all,
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(color = "black", fill = NA),
-        axis.text.x = element_blank(),    # 隐藏X轴的样本名
+        axis.text.x = element_blank(),    
         axis.ticks.x = element_blank()) 
 #################################
 install.packages("umap")
@@ -105,11 +104,11 @@ rownames(tsne_df) <- tsne_df$Row.names
 p <- ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = Tissue, shape = Gender)) +
   geom_point(size = 2) +
   labs(title = "t-SNE Projection with Custom Shapes for Groups") +
-  scale_shape_manual(values = c(16, 17, 15, 18)) +  # 分别为圆形，三角形，正方形，菱形
+  scale_shape_manual(values = c(16, 17, 15, 18)) + 
   theme_minimal() + 
   theme(
     panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.border = element_rect(color = "black", fill = NA, size = 1) 
   )
 p
 p <- ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = Tissue, shape = Gender)) +
@@ -119,7 +118,7 @@ p <- ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = Tissue, shape = Gender)) 
   theme_minimal() + 
   theme(
     panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 p_with_marginal <- ggMarginal(p, type = "density",groupColour = T, groupFill = TRUE)
 p_with_marginal
@@ -130,18 +129,18 @@ a <- rare_curve_sample(otutab_spe)
 p <- plot(a)+  theme_minimal() +
   theme(
     panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 a <- rare_curve_species(otutab, mode = 1) 
 p <- plot(a)+ 
   theme_minimal() + 
   theme(
     panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 plot(a)
 group_box(meta_all["Age"], group = "Group", meta_all, alpha = T)
-#########################################################################分别分析
+#########################################################################
 otu_spe <- otutab
 
 #########pctils oral
@@ -150,21 +149,21 @@ otutab <- otutab_spe[,colnames(otutab_spe) %in% rownames(metadata_oral)]
 a_diversity(otutab) -> a_res
 plot(a_res, "Age", metadata_oral) +   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.grid = element_blank(),    
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 as.b_dist(dist1, group_df = metadata_oral["Age"]) -> b_dist1
-plot(b_dist1, c_group = "intra", alpha = T) +  # 分别为圆形，三角形，正方形，菱形
+plot(b_dist1, c_group = "intra", alpha = T) + 
   theme_minimal() + 
   theme(
     panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.border = element_rect(color = "black", fill = NA, size = 1)
   )
-plot(b_dist1, mode = 2)+  # 分别为圆形，三角形，正方形，菱形
+plot(b_dist1, mode = 2)+ 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.grid = element_blank(),   
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 metadata_skin <- meta_all[meta_all$tissue =="Skin",]
 
@@ -172,8 +171,8 @@ otutab <- otutab_spe[,colnames(otutab_spe) %in% rownames(metadata_skin)]
 a_diversity(otutab) -> a_res
 plot(a_res, "Age", metadata_skin) +   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.grid = element_blank(),   
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  #
   )
 dist1 <- mat_dist(otutab, method = "bray")
 
@@ -182,8 +181,8 @@ as.b_dist(dist1, group_df = metadata_skin["Age"]) -> b_dist1
 plot(b_dist1, mode = 2)+ 
   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.grid = element_blank(),   
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 
 metadata_Gut <- meta_all[meta_all$tissue=="Gut",]
@@ -191,17 +190,17 @@ otutab <- otutab_spe[,colnames(otutab_spe) %in% rownames(metadata_Gut)]
 a_diversity(otutab) -> a_res
 plot(a_res, "Age", metadata_Gut ) +   theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.grid = element_blank(),   
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  #
   )
 dist1 <- mat_dist(otutab, method = "bray")
 
 as.b_dist(dist1, group_df = metadata_Gut["Age"]) -> b_dist1
-plot(b_dist1, mode = 2)+  # 分别为圆形，三角形，正方形，菱形
+plot(b_dist1, mode = 2)+  
   theme_minimal() + 
   theme(
     panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 
 
@@ -212,8 +211,8 @@ as.b_dist(dist1, group_df = meta_gut["Age"]) -> b_dist1
 plot(b_dist1, c_group = "intra", alpha = T)
 plot(b_dist1, mode = 2) + theme_minimal() + 
   theme(
-    panel.grid = element_blank(),    # 移除背景线
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # 添加黑色边框
+    panel.grid = element_blank(),   
+    panel.border = element_rect(color = "black", fill = NA, size = 1)  
   )
 
 
