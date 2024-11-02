@@ -65,8 +65,8 @@ text(sft$fitIndices[,1], sft$fitIndices[,5], labels=powers,
 
 sft$powerEstimate
 cor <- WGCNA::cor
-net = blockwiseModules(datExpr, power = 4,
-                       TOMType = "unsigned", minModuleSize = 30,
+net = blockwiseModules(datExpr, power = 6,
+                       TOMType = "unsigned", minModuleSize = 50,
                        reassignThreshold = 1, mergeCutHeight = 0.1,
                        numericLabels = TRUE, pamRespectsDendro = FALSE,
                        saveTOMs = TRUE,
