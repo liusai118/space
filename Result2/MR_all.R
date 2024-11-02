@@ -17,7 +17,7 @@ All <- all %>%
   mutate(col2 = case_when(
     p_col == "Postive effect(P<0.05)" ~ "#d55e00",
     p_col == "Negtive effect(P<0.05)" ~ "#0072b2",
-    TRUE ~ NA_character_  # 处理未匹配的情况
+    TRUE ~ NA_character_ 
   ))
 ###########
 
