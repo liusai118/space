@@ -103,11 +103,13 @@ labeledHeatmap(Matrix = moduleTraitCor,
                cex.text = 0.1,
                zlim = c(-0.6,0.6),
                main = paste("Module-trait relationships"))
-lantency = as.data.frame(datTraits$age);
+lantency = as.data.frame(datTraits$host.age);
+modNames = substring(names(MEs), 3)
 geneModuleMembership = as.data.frame(cor(datExpr, MEs, use = "p"));
 MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples));
 names(geneModuleMembership) = paste("MM", modNames, sep="");
 names(MMPvalue) = paste("p.MM", modNames, sep="");
+geneTraitSignificance = as.data.frame(cor(datExpr, lantency, use = "p"));
 GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples));
 names(geneTraitSignificance) = paste("GS.", names(lantency), sep="");
 names(GSPvalue) = paste("p.GS.", names(lantency), sep="");
