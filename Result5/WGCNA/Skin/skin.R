@@ -11,7 +11,7 @@ par(cex = 0.6);
 par(mar = c(0,4,2,0))
 plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="", cex.lab = 1.5,
      cex.axis = 1.5, cex.main = 2)
-abline(h = 36, col = "red") 
+abline(h = 9, col = "red") 
 clust = cutreeStatic(sampleTree, cutHeight = 9, minSize = 5)
 
 table(clust)   
