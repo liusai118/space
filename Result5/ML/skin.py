@@ -150,4 +150,4 @@ for name, results in holdout_results.items():
 holdout_results_csv_path = "holdout_model_evaluation_skin_results.csv"
 holdout_results_df.to_csv(holdout_results_csv_path, index=False)
 
-print(f"Hold-Out 评估结果已保存到 {holdout_results_csv_path}")
+print(f"Hold-Out {holdout_results_csv_path}")
