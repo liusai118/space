@@ -1,21 +1,21 @@
 library(WGCNA)
-femData = read.csv("WGCNA_oral.csv",row.names = 1) #载入基因表达量数据
+femData = read.csv("WGCNA_oral.csv",row.names = 1) 
 femData<- log10(femData + 1)
 datExpr0 = as.data.frame(t(femData)) 
 gsg = goodSamplesGenes(datExpr0, verbose = 6);
 gsg$allOK
 sampleTree = hclust(dist(datExpr0), method = "average")
-sizeGrWindow(12,9) #视图
+sizeGrWindow(12,9) 
 par(cex = 0.6);
 par(mar = c(0,4,2,0))
 plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="", cex.lab = 1.5,
      cex.axis = 1.5, cex.main = 2)
-abline(h = 12, col = "red") #划定需要剪切的枝长
+abline(h = 12, col = "red")
 clust = cutreeStatic(sampleTree, cutHeight = 10, minSize = 5)
 dev.off()
 table(clust)   
-keepSamples = (clust==1)  #保留非离群(clust==1)的样本
-datExpr = datExpr0[keepSamples, ]  #去除离群值后的数据
+keepSamples = (clust==1) 
+datExpr = datExpr0[keepSamples, ] 
 nGenes = ncol(datExpr)
 nSamples = nrow(datExpr)
 traitData = read.csv("WGCNA_oral_meta.csv",row.names = 2)
@@ -35,30 +35,27 @@ collectGarbage()
 
 
 sampleTree2 = hclust(dist(datExpr), method = "average")
-traitColors = numbers2colors(datTraits, signed = FALSE) #用颜色代表关联度
+traitColors = numbers2colors(datTraits, signed = FALSE)
 plotDendroAndColors(sampleTree2, traitColors,
                     groupLabels = names(datTraits),
                     main = "Sample dendrogram and trait heatmap")
 
-#2.1 构建自动化网络和检测模块
 type = "unsigned"
 powers = c(c(1:10), seq(from = 12, to=30, by=2))
 sft = pickSoftThreshold(datExpr, powerVector=powers, 
                         networkType=type, verbose=5)
 par(mfrow = c(1,2))
 cex1 = 0.9
-# 横轴是Soft threshold (power)，纵轴是无标度网络的评估参数，数值越高，
-# 网络越符合无标度特征 (non-scale)
 plot(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2],
      xlab="Soft Threshold (power)",
      ylab="Scale Free Topology Model Fit,signed R^2",type="n",
      main = paste("Scale independence"))
 text(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2],
      labels=powers,cex=cex1,col="red")
-# 筛选标准。R-square=0.85
+
 abline(h=0.85,col="red")
 
-# Soft threshold与平均连通性
+
 plot(sft$fitIndices[,1], sft$fitIndices[,5],
      xlab="Soft Threshold (power)",ylab="Mean Connectivity", type="n",
      main = paste("Mean connectivity"))
@@ -95,14 +92,14 @@ MEs = orderMEs(MEs0)
 moduleTraitCor = cor(MEs, datTraits, use = "p");
 
 moduleTraitPvalue = corPvalueStudent(moduleTraitCor, nSamples);
-# 通过相关值对每个关联进行颜色编码
+
 sizeGrWindow(10,6)
-# 展示模块与表型数据的相关系数和 P值
+
 textMatrix = paste(signif(moduleTraitCor, 2), "\n(",
                    signif(moduleTraitPvalue, 1), ")", sep = "");
 dim(textMatrix) = dim(moduleTraitCor)
 par(mar = c(6, 8.5, 3, 3));
-# 用热图的形式展示相关系数
+
 labeledHeatmap(Matrix = moduleTraitCor,
                xLabels = names(datTraits),
                yLabels = names(MEs),
