@@ -15,8 +15,8 @@ abline(h = 5.5, col = "red")
 clust = cutreeStatic(sampleTree, cutHeight = 5.5, minSize = 5)
 table(clust)   
 
-keepSamples = (clust==1)  #保留非离群(clust==1)的样本
-datExpr = datExpr0[keepSamples, ]  #去除离群值后的数据
+keepSamples = (clust==1)  
+datExpr = datExpr0[keepSamples, ] 
 nGenes = ncol(datExpr)
 nSamples = nrow(datExpr)
 traitData = read.csv("WGCNA_meta_gut.csv")
@@ -30,29 +30,24 @@ rownames(datTraits) = traitData[traitRows, 1];
 datTraits <- datTraits[,-1]
 collectGarbage()
 sampleTree2 = hclust(dist(datExpr), method = "average")
-traitColors = numbers2colors(datTraits, signed = FALSE) #用颜色代表关联度
+traitColors = numbers2colors(datTraits, signed = FALSE)
 plotDendroAndColors(sampleTree2, traitColors,
                     groupLabels = names(datTraits),
                     main = "Sample dendrogram and trait heatmap")
-#2.1 构建自动化网络和检测模块
 type = "unsigned"
 powers = c(c(1:10), seq(from = 12, to=30, by=2))
 sft = pickSoftThreshold(datExpr, powerVector=powers, 
                         networkType=type, verbose=5)
 par(mfrow = c(1,2))
 cex1 = 0.9
-# 横轴是Soft threshold (power)，纵轴是无标度网络的评估参数，数值越高，
-# 网络越符合无标度特征 (non-scale)
 plot(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2],
      xlab="Soft Threshold (power)",
      ylab="Scale Free Topology Model Fit,signed R^2",type="n",
      main = paste("Scale independence"))
 text(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2],
      labels=powers,cex=cex1,col="red")
-# 筛选标准。R-square=0.85
 abline(h=0.85,col="red")
 
-# Soft threshold与平均连通性
 plot(sft$fitIndices[,1], sft$fitIndices[,5],
      xlab="Soft Threshold (power)",ylab="Mean Connectivity", type="n",
      main = paste("Mean connectivity"))
@@ -80,7 +75,7 @@ plotDendroAndColors(net$dendrograms[[1]], mergedColors[net$blockGenes[[1]]],
 
 nGenes = ncol(datExpr);
 nSamples = nrow(datExpr);
-# 重新计算带有颜色标签的模块
+
 moduleLabels = net$colors
 moduleColors = labels2colors(net$colors)
 MEs = net$MEs;
@@ -120,9 +115,7 @@ ADJ=abs(cor(datExpr,use="p"))^6
 Alldegrees =intramodularConnectivity(ADJ, moduleColors)
 write.csv(Alldegrees, file = "intramodularConnectivity.csv")
 pdf("GS vs. degree_weight3.pdf",width = 14,height = 8)
-# 布局。这个可以根据自己的module数目进行调整。我有20个module，所以这里设置了4行，每行5个图
-par(mfrow=c(4,5))
-# 设置图形边界，四个数字分别对应下左上右
+
 par(mar = c(5,5,3,3))
 colorlevels=unique(moduleColors)
 for (i in c(1:length(colorlevels))) 
