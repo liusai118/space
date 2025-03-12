@@ -20,7 +20,7 @@
 
 ## Results
 
-### Result 1:
+### Figure 1:
 
 - **Analysis**:
   - `scRNA.ipynb`: Used to analyze the raw single-cell RNA sequencing data.
@@ -37,7 +37,7 @@
 - **Species Annotation**:
   - `taxonmy_prepare.R`: Used to prepare the species annotation information table for basic analysis.
 
-### Result 2
+### Figure 2
 
 - **Species Annotation**:
   - `taxonmy_prepare.R`: Used to prepare the species annotation information table for basic analysis.
