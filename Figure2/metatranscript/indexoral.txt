@@ -1,0 +1,7 @@
+Streptococcus_dysgalactiae
+Streptococcus_equi
+Streptococcus_mitis
+Streptococcus_pneumoniae
+Streptococcus_sobrinus
+Streptococcus_sp.SP4011
+Streptococcus_toyakuensis
